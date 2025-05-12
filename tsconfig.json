@@ -1,0 +1,36 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["DOM", "ESNext"],
+    "types": ["vite/client"],
+    "removeComments": true,
+    /* 严格检查选项 */
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    /* 额外检查 */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    /* 实验选项 */
+    "experimentalDecorators": true,
+    /* 高级选项 */
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "vite.config.*",
+    "types/*.d.ts",
+    "src/types/**/*.d.ts"
+  ]
+}
