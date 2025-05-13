@@ -1,9 +1,11 @@
 import YYButtton from './YYButtton.vue'
 import YYHeader from './YYHeader.vue'
+import YYConfigProvider from './YYConfigProvider.vue'
 
 const YYui = {
   'yy-button': YYButtton,
-  'yy-header': YYHeader
+  'yy-header': YYHeader,
+  'yy-config-provider': YYConfigProvider
 }
 
 export default {

@@ -20,6 +20,26 @@ pnpm build
 
 然后你会看到用于发布的 `dist` 文件夹被生成。
 
+## 基础知识
+
+### css设计的原则
+
+- BEM方式命名：Block Element Modifier
+  class="block-element-modifier"
+
+  block:模块 element:元素类型 modifier:修饰符（primary/default/danger等）
+  eg:
+
+  ```html
+  <button ariadisabled="false" type="button" class="el-button el-button--primary" style=""></button>
+
+  <div class="ant-tabs ant-tabs-top ant-tabs-small markdown css-var-«ro0» ant-tabs-css-var"></div>
+  ```
+
+- 结构和皮肤分离
+
+  设置两个类名。一个专门设置宽高间距等样式，另一个设置背景色、字体颜色等颜色设置。
+
 ## 功能
 
 ### 暗黑模式
@@ -73,7 +93,7 @@ pnpm build
 
   其他视频
 
- https://www.bilibili.com/video/BV1eg4y137vd
+https://www.bilibili.com/video/BV1eg4y137vd
 
 ## scss分支
 
@@ -93,15 +113,15 @@ pnpm build
 
 #### css设计注意点
 
-- BEM方式命名：Block Element Modifier 
-  class="block-element-modifier" 
-  
-  block:模块  element:元素类型  modifier:修饰符（primary/default/danger等）
+- BEM方式命名：Block Element Modifier
+  class="block-element-modifier"
+
+  block:模块 element:元素类型 modifier:修饰符（primary/default/danger等）
   eg:
-  
+
   ```html
   <button ariadisabled="false" type="button" class="el-button el-button--primary" style=""></button>
-  
+
   <div class="ant-tabs ant-tabs-top ant-tabs-small markdown css-var-«ro0» ant-tabs-css-var"></div>
   ```
 
@@ -109,3 +129,26 @@ pnpm build
 
   设置两个类名。一个专门设置宽高间距等样式，另一个设置背景色、字体颜色等颜色设置。
 
+## css-var分支
+
+定义css变量来实现换肤
+
+### 基础know
+
+#### css变量语法
+
+- 定义变量
+
+```css
+:root {
+  --ant-primary-color: #1677ff;
+}
+```
+
+- 使用变量
+
+```css
+.ant-btn {
+  color: var(--ant-primary-color);
+}
+```

@@ -7,9 +7,14 @@
 // 默认主题也要在这里再写一遍
 $themes: (
   'default': (
-    theme-color: #409eff,
-    button-primary: #409eff,
-    font-color: #fff
+    // theme-color: #409eff,
+    // button-primary: #409eff,
+    // font-color: #fff
+    // 语法：定义css变量，如果第一个参数没有定义，则使用第二个参数（默认值）为#409eff。
+    //      如果父元素有设置css变量，则优先使用父元素的css变量值。第一个参数（通常在html标签或者body标签等顶级父元素中设置属性）
+    theme-color: var(--data-theme-color, #409eff),
+    button-primary: var(--data-button-primary, #4120e8),
+    font-color: var(--data-font-color, #fff)
   ),
   'violet': (
     theme-color: #8a2be2,
@@ -17,9 +22,12 @@ $themes: (
     font-color: #fff
   ),
   'pink': (
-    theme-color: #f7a8b5,
-    button-primary: #ffc0cb,
-    font-color: #333
+    // theme-color: #f7a8b5,
+    // button-primary: #f1637b,
+    // font-color: #333
+    theme-color: var(--data-theme-color, #f7a8b5),
+    button-primary: var(--data-button-primary, #f1637b),
+    font-color: var(--data-font-color, #333)
   )
 );
 
