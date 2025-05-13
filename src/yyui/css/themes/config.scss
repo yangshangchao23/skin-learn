@@ -1,0 +1,18 @@
+// 拆分主题文件 来定义内置的3套主题变量
+$default-theme: (
+  theme-color: #409eff,
+  button-primary: #409eff,
+  font-color: #fff
+) !default;
+
+$violet-theme: (
+  theme-color: #8a2be2,
+  button-primary: #9370db,
+  font-color: #fff
+) !default;
+
+$pink-theme: (
+  theme-color: #f7a8b5,
+  button-primary: #ffc0cb,
+  font-color: #333
+) !default;

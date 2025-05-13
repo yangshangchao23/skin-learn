@@ -4,15 +4,43 @@
 // 实现动态切换：
 // 写成一个集合变量，存储不同主题对应的颜色
 // 注意：变成集合表达主题色之后。index.scss中需要通过方法，借助mixin来获取变量颜色
-$themes: (
-  'default': (
-    theme-color: #409eff,
-    button-primary: #409eff,
-    font-color: #fff
-  )
-) !default;
+// $themes: (
+//   'default': (
+//     theme-color: #409eff,
+//     button-primary: #409eff,
+//     font-color: #fff
+//   )
+// ) !default;
 
 // 上述代码解析
 // 1. 定义一个集合变量$themes，存储不同主题对应的颜色
 // 2. 语法用()表示对象，类似js的 {}
 // 3.!default表示默认值，只有在没有定义的情况下才会使用这个值
+
+// 终极版 - 合并失败
+// $themes: (
+//   'default': (
+//     theme-color: #409eff,
+//     button-primary: #409eff,
+//     font-color: #fff
+//   ),
+//   'violet': (
+//     theme-color: #8a2be2,
+//     button-primary: #9370db,
+//     font-color: #fff
+//   ),
+//   'pink': (
+//     theme-color: #f7a8b5,
+//     button-primary: #ffc0cb,
+//     font-color: #333
+//   )
+// ) !default;
+
+// 终极版 - done - 拆分主题文件 ./themes/config
+// 内置三个主题色，deault、violet、pink
+@use './themes/config' as themes;
+$themes: (
+  'default': themes.$default-theme,
+  'violet': themes.$violet-theme,
+  'pink': themes.$pink-theme
+) !default;

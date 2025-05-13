@@ -4,24 +4,49 @@
 // $button-primary: green;
 
 // 定义多套主题色覆盖default主题色
-// 默认主题也要在这里再写一遍
-$themes: (
-  'default': (
-    theme-color: #409eff,
-    button-primary: #409eff,
+// 默认主题也要在这里再写一遍！
+// $themes: (
+//   'default': (
+//     theme-color: #409eff,
+//     button-primary: #409eff,
+//     font-color: #fff
+//   )
+// );
+
+// // 组件库样式写在后才能被覆盖
+// @use '@/yyui/css/index.scss';
+
+// 终极版合并失败
+// 如果内置的pink主题色不符合需求，可以在这里覆盖
+// 保留默认的内置3个主题色
+// 覆盖默认主题变量（可选）
+// 使用 map-merge() 改成map.merge() 合并主题（需先引入 sass:map）
+// @use 'sass:map';
+// @use '@/yyui/css/variable' as variable;
+// @use '@/yyui/css/variable' as * with (
+//   $custom-themes: map.merge(
+//       variable.$themes,
+//       (
+//         'pink': (
+//           theme-color: #f43d99,
+//           // 覆盖粉色主题
+//           button-primary: #f61887,
+//           font-color: #fff
+//         )
+//       )
+//     )
+// );
+
+// @use '@/yyui/css/index.scss';
+
+// 终极版 - done
+// 如果内置的pink主题色不符合需求，把自定义的pink主题合并到 拆分主题文件 ./themes/config
+@use '@/yyui/css/themes/config' as * with (
+  $pink-theme: (
+    theme-color: #f43d99,
+    button-primary: #f61887,
     font-color: #fff
-  ),
-  'violet': (
-    theme-color: #8a2be2,
-    button-primary: #9370db,
-    font-color: #fff
-  ),
-  'pink': (
-    theme-color: #f7a8b5,
-    button-primary: #ffc0cb,
-    font-color: #333
   )
 );
 
-// 组件库样式写在后才能被覆盖
-@import '@/yyui/css/index.scss';
+@use '@/yyui/css/index.scss';

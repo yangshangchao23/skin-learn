@@ -1,16 +1,19 @@
+@use './variable' as variable; // 引入变量文件
+@use 'sass:map'; // 引入map模块
+
 @mixin get-background-color($color) {
-  @each $theme, $value in $themes {
+  @each $theme, $value in variable.$themes {
     [data-theme='#{$theme + ""}'] & {
-      background-color: map-get($value, $color);
+      background-color: map.get($value, $color);
     }
   }
 }
 
 // 其他颜色获取
 @mixin get-font-color($color) {
-  @each $theme, $value in $themes {
+  @each $theme, $value in variable.$themes {
     [data-theme='#{$theme + ""}'] & {
-      color: map-get($value, $color);
+      color: map.get($value, $color);
     }
   }
 }
