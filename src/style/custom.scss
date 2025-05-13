@@ -1,0 +1,27 @@
+// 该文件夹用来修改yyui组件库的默认主题色
+// 覆盖的变量写在前
+// $theme-color: pink;
+// $button-primary: green;
+
+// 定义多套主题色覆盖default主题色
+// 默认主题也要在这里再写一遍
+$themes: (
+  'default': (
+    theme-color: #409eff,
+    button-primary: #409eff,
+    font-color: #fff
+  ),
+  'violet': (
+    theme-color: #8a2be2,
+    button-primary: #9370db,
+    font-color: #fff
+  ),
+  'pink': (
+    theme-color: #f7a8b5,
+    button-primary: #ffc0cb,
+    font-color: #333
+  )
+);
+
+// 组件库样式写在后才能被覆盖
+@import '@/yyui/css/index.scss';

@@ -1,0 +1,28 @@
+@mixin get-background-color($color) {
+  @each $theme, $value in $themes {
+    [data-theme='#{$theme + ""}'] & {
+      background-color: map-get($value, $color);
+    }
+  }
+}
+
+// 其他颜色获取
+@mixin get-font-color($color) {
+  @each $theme, $value in $themes {
+    [data-theme='#{$theme + ""}'] & {
+      color: map-get($value, $color);
+    }
+  }
+}
+
+// 上述代码逐行解析
+// 1. 定义一个mixin，mixin是一个函数
+// 参数：$color，表示要获取的颜色
+// 函数处理：
+// 2. 遍历$themes集合变量  @each $theme, $value in $themes
+// $theme：主题键名（对应选中的主题） default、pink、blue等
+// $value：key对应的value值。即default主题对应的颜色值  (theme-color: #409eff,button-primary: #409eff)
+// 3.判断当前的主题是选中哪个主题  [data-theme='#{$theme}']
+// 切换时，html根标签会出现属性和属性值的变化 <html data-theme="default"> <html data-theme="pink">
+// 4.map-get($value, $color) 获取当前主题下的颜色值设置css属性样式值 传入对应的key参数获取。
+// $color：可以根据你传入的参数，获取对应的颜色值。传入的参数必须和集合变量表设置的key一致！例如theme-color、button-primary

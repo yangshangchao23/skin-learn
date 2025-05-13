@@ -1,0 +1,21 @@
+// @import './variable.scss';
+@import './mixin.scss';
+
+.yy-header {
+  width: 100%;
+  min-height: 45px;
+}
+.yy-header-primary {
+  // background-color: $theme-color;
+  // 改用mixin中的方法获取变量
+  @include get-background-color(theme-color);
+  @include get-font-color(font-color);
+}
+.yy-button {
+  min-width: 40px;
+}
+.yy-button-primary {
+  // background-color: $button-primary;
+  @include get-background-color(button-primary);
+  @include get-font-color(font-color);
+}
