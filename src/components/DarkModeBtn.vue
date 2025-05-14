@@ -1,37 +1,42 @@
 <script setup lang="ts">
-// const Mode = computed(() => {
-//   const currentMode = localStorage.getItem('Mode')
-//   console.log(currentMode, 'currentMode')
-
-//   if (currentMode) return currentMode
-//   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-// })
 const curMode = ref('light')
-const setMode = (mode: string) => {
-  const htmlEl = document.documentElement
-  mode === 'dark' ? htmlEl.classList.add('dark') : htmlEl.classList.remove('dark')
+const setHtmlMode = (mode: string) => {
+  const rootEl = document.documentElement
+  mode === 'dark' ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
 }
 
-// 监听系统主题的变化 -- 首次加载，没经过手动切换需要进行监听
 onMounted(() => {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    setMode(e.matches ? 'dark' : 'light')
-  })
+  curMode.value = getModePerference()
+  setHtmlMode(curMode.value)
 })
 
-const toggleMode = () => {}
+const getModePerference = () => {
+  const currentMode = localStorage.getItem('mode')
+  if (currentMode) return currentMode
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+const toggleMode = () => {
+  // 获取当前模式
+  const mode = getModePerference()
+  const newMode = mode === 'dark' ? 'light' : 'dark'
+  // 获取html标签，设置class="dark"
+  setHtmlMode(newMode)
+  localStorage.setItem('mode', newMode)
+  curMode.value = newMode
+}
 </script>
 
 <template>
   <div>
-    <button class="Mode-toggle-btn" @click="toggleMode">
+    <button class="mode-toggle-btn" @click="toggleMode">
       {{ curMode === 'dark' ? '🌞' : '🌙' }}
     </button>
   </div>
 </template>
 
 <style scoped lang="scss">
-.Mode-toggle-btn {
+.mode-toggle-btn {
   position: fixed;
   top: 20px;
   right: 20px;
