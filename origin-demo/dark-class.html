@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./dark-class.css" />
+  </head>
+  <body>
+    <h2>原生换肤方案-通过class切换</h2>
+    <script>
+      // 获取主题偏好
+      const getThemePreference = () => {
+        const currentTheme = localStorage.getItem('theme')
+        if (currentTheme) return currentTheme
+        return window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'
+      }
+      // 应用主题(通过class切换)
+      const applyTheme = (theme) => {
+        const rootEl = document.documentElement
+        theme === 'dark' ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
+      }
+      // 初始化主题
+      const initTheme = () => {
+        const theme = getThemePreference()
+        applyTheme(theme)
+
+        // 创建切换按钮
+        const toggleBtn = document.createElement('button')
+        toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙'
+        toggleBtn.classList.add('theme-toggle-btn')
+        // 手动切换逻辑
+        toggleBtn.addEventListener('click', () => {
+          // const rootEl = document.documentElement
+          // const currentTheme = rootEl.classList.contains('dark') ? 'dark' : 'light'
+          const currentTheme = getThemePreference()
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+          localStorage.setItem('theme', newTheme)
+          applyTheme(newTheme)
+          toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙'
+        })
+
+        document.body.appendChild(toggleBtn)
+
+        // 监听系统主题的变化 -- 首次加载，没经过手动切换需要进行监听
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light')
+            toggleBtn.textContent = e.matches ? '☀️' : '🌙'
+          }
+        })
+      }
+
+      window.addEventListener('DOMContentLoaded', initTheme)
+    </script>
+  </body>
+</html>

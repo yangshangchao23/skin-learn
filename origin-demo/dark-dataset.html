@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./dark-dataset.css" />
+  </head>
+  <body>
+    <h2>原生换肤方案-通过dataset切换</h2>
+    <script>
+      const getThemePreference = () => {
+        const currentTheme = localStorage.getItem('theme')
+        if (currentTheme) return currentTheme
+        return window.matchMedia('(perefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      }
+      // 应用主题(通过dataset切换)
+      const applyTheme = (theme) => {
+        const rootEl = document.documentElement
+        rootEl.setAttribute('data-theme', theme)
+      }
+      const initTheme = () => {
+        const theme = getThemePreference()
+        applyTheme(theme)
+
+        const toggleBtn = document.createElement('button')
+        toggleBtn.textContent = theme === 'dark' ? '🌞' : '🌙'
+        toggleBtn.classList.add('theme-toggle-btn')
+
+        toggleBtn.addEventListener('click', () => {
+          const currentTheme = getThemePreference()
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+          localStorage.setItem('theme', newTheme)
+          applyTheme(newTheme)
+          toggleBtn.textContent = newTheme === 'dark' ? '🌞' : '🌙'
+        })
+
+        document.body.appendChild(toggleBtn)
+
+        // 没手动切换前需监听更新
+        window.matchMedia('(perefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light')
+          }
+        })
+      }
+
+      window.addEventListener('DOMContentLoaded', initTheme)
+    </script>
+  </body>
+</html>
