@@ -2,7 +2,8 @@
 const curMode = ref('light')
 const setHtmlMode = (mode: string) => {
   const rootEl = document.documentElement
-  mode === 'dark' ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
+  // mode === 'dark' ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
+  rootEl.classList.toggle('dark', mode === 'dark')
 }
 
 onMounted(() => {
@@ -18,8 +19,9 @@ const getModePerference = () => {
 
 const toggleMode = () => {
   // 获取当前模式
-  const mode = getModePerference()
-  const newMode = mode === 'dark' ? 'light' : 'dark'
+  // const mode = getModePerference()
+  // const newMode = mode === 'dark' ? 'light' : 'dark'
+  const newMode = curMode.value === 'dark' ? 'light' : 'dark'
   // 获取html标签，设置class="dark"
   setHtmlMode(newMode)
   localStorage.setItem('mode', newMode)
