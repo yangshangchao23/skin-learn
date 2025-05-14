@@ -2,7 +2,9 @@ import { createApp } from 'vue'
 import router from './router'
 import App from './App.vue'
 import yyui from './yyui'
-import '@/style/style.css'
+// import '@/style/style.css'
+// 使用新的暗黑模式css文件
+import '@/style/index.css'
 // 引入组件库css
 // import '@/yyui/css/index.scss'
 // 改为引入覆盖组件库默认主题的自定义主题css

@@ -19,6 +19,7 @@ declare module 'vue' {
     ASteps: typeof import('ant-design-vue/es')['Steps']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    DarkModeBtn: typeof import('./../src/components/DarkModeBtn.vue')['default']
     Empty: typeof import('./../src/components/Empty/index.vue')['default']
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
