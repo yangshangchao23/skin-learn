@@ -46,7 +46,7 @@
 :root.dark {
   --bg-color: #242424;
   --text-color: rgba(255, 255, 255, 0.87);
-  --ant-primary-color: #1677ff;
+  --ant-primary-color: #8ab4f8;
 }
 
 body {
@@ -57,7 +57,9 @@ body {
   /* 使用css变量 */
   color: var(--text-color);
   background-color: var(--bg-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 a {
@@ -102,4 +104,26 @@ button:focus-visible {
   padding: 1.5rem;
   box-sizing: border-box;
   width: 100%;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
+html.dark::view-transition-old(root) {
+  z-index: 2147483646;
+}
+
+html.dark::view-transition-new(root) {
+  z-index: 1;
 }

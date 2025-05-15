@@ -17,13 +17,48 @@ const getModePerference = () => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-const toggleMode = () => {
+const setHtmlModeAndTransition = (event) => {
+  // 检查浏览器是否支持 View Transition API
+  if (!document.startViewTransition) {
+    // 不支持则直接切换主题，不添加动画
+    document.documentElement.classList.toggle('dark')
+    return
+  }
+  const transition = document.startViewTransition(() => {
+    document.documentElement.classList.toggle('dark')
+  })
+  transition.ready.then(() => {
+    const { clientX, clientY } = event
+    const endRadius = Math.hypot(
+      Math.max(clientX, innerWidth - clientX),
+      Math.max(clientY, innerHeight - clientY)
+    )
+    const clipPath = [
+      `circle(0px at ${clientX}px ${clientY}px)`,
+      `circle(${endRadius}px at ${clientX}px ${clientY}px)`
+    ]
+    const isDark = document.documentElement.classList.contains('dark')
+    document.documentElement.animate(
+      {
+        clipPath: isDark ? clipPath.reverse() : clipPath
+      },
+      {
+        duration: 450,
+        easing: 'ease-in',
+        pseudoElement: isDark ? '::view-transition-old(root)' : '::view-transition-new(root)'
+      }
+    )
+  })
+}
+
+const toggleMode = (event) => {
   // 获取当前模式
   // const mode = getModePerference()
   // const newMode = mode === 'dark' ? 'light' : 'dark'
   const newMode = curMode.value === 'dark' ? 'light' : 'dark'
   // 获取html标签，设置class="dark"
-  setHtmlMode(newMode)
+  // setHtmlMode(newMode)
+  setHtmlModeAndTransition(event)
   localStorage.setItem('mode', newMode)
   curMode.value = newMode
 }
