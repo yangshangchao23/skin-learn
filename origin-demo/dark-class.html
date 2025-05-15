@@ -30,14 +30,49 @@
         toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙'
         toggleBtn.classList.add('theme-toggle-btn')
         // 手动切换逻辑
-        toggleBtn.addEventListener('click', () => {
+        toggleBtn.addEventListener('click', (event) => {
           // const rootEl = document.documentElement
           // const currentTheme = rootEl.classList.contains('dark') ? 'dark' : 'light'
           const currentTheme = getThemePreference()
           const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
           localStorage.setItem('theme', newTheme)
-          applyTheme(newTheme)
+          // applyTheme(newTheme)
           toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙'
+
+          // 添加半圆过渡背景色效果
+          // 检查浏览器是否支持 View Transition API
+          if (!document.startViewTransition) {
+            // 不支持则直接切换主题，不添加动画
+            document.documentElement.classList.toggle('dark')
+            return
+          }
+          const transition = document.startViewTransition(() => {
+            document.documentElement.classList.toggle('dark')
+          })
+          transition.ready.then(() => {
+            const { clientX, clientY } = event
+            const endRadius = Math.hypot(
+              Math.max(clientX, innerWidth - clientX),
+              Math.max(clientY, innerHeight - clientY)
+            )
+            const clipPath = [
+              `circle(0px at ${clientX}px ${clientY}px)`,
+              `circle(${endRadius}px at ${clientX}px ${clientY}px)`
+            ]
+            const isDark = document.documentElement.classList.contains('dark')
+            document.documentElement.animate(
+              {
+                clipPath: isDark ? clipPath.reverse() : clipPath
+              },
+              {
+                duration: 450,
+                easing: 'ease-in',
+                pseudoElement: isDark
+                  ? '::view-transition-old(root)'
+                  : '::view-transition-new(root)'
+              }
+            )
+          })
         })
 
         document.body.appendChild(toggleBtn)
