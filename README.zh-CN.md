@@ -101,6 +101,8 @@ https://www.bilibili.com/video/BV1eg4y137vd 【暂时忽略】
 
 [TailwindCSS如何轻松实现夜间模式，既能跟随系统又能手动控制](https://juejin.cn/post/7312727134297210914)
 
+[css实现色弱模式, 灰色模式, 暗黑模式](https://juejin.cn/post/7301173486894104615)
+
 ## scss分支
 
 需求：​ 假如自己开发一套组件库，如何让用户可以换肤？
@@ -137,7 +139,7 @@ https://www.bilibili.com/video/BV1eg4y137vd 【暂时忽略】
 
 ## dark-mode分支
 
-暗黑模式分支
+暗黑模式分支(基于scss分支)  + 色弱模式 + 灰色模式
 
 ### 原生-css变量
 
@@ -172,7 +174,7 @@ filter: invert(1) hue-rotate(180deg);
 
 #### light-dark()
 
-2024年css新特性 [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) 
+2024年css新特性 [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark)
 
 ```css
 :root {
@@ -187,3 +189,26 @@ body {
 ### 添砖加瓦
 
 - Element Plus暗黑模式转换过渡效果-半圆过渡转换背景色的实现原理
+
+### 色弱/灰色模式
+
+```shell
+src\components\InvertModeBtn.vue
+src\components\GrayModeBtn.vue
+```
+
+```css
+/* 色弱模式 */
+.invert-mode {
+  filter: invert(80%);
+  -webkit-filter: invert(80%);
+  transition: filter 0.3s ease;
+}
+/* 灰色模式 */
+.grayscale-mode { 
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+```
+

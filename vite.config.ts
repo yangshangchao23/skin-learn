@@ -1,9 +1,16 @@
+/*
+ * @Author: yangshangchao
+ * @Date: 2025-05-12 11:19:03
+ * @LastEditors: yangshangchao
+ * @Description: 头部注释
+ */
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,6 +21,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    tailwindcss(),
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
       dts: 'types/auto-imports.d.ts'

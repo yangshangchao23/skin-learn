@@ -12,6 +12,8 @@ const changeSkin = (skin: string) => {
     <yy-header title="YYUI使用手册" />
     <yy-button>点击</yy-button>
     <h1>文字</h1>
+    <InvertModeBtn />
+    <GrayModeBtn />
   </div>
 </template>
 

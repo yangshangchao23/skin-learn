@@ -28,6 +28,7 @@
   }
 } */
 /* 浅色模式 */
+@import 'tailwindcss';
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -126,4 +127,16 @@ html.dark::view-transition-old(root) {
 
 html.dark::view-transition-new(root) {
   z-index: 1;
+}
+/* 色弱模式 */
+.invert-mode {
+  filter: invert(80%);
+  -webkit-filter: invert(80%);
+  transition: filter 0.3s ease;
+}
+/* 灰色模式 */
+.grayscale-mode { 
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: filter 0.3s ease;
 }
