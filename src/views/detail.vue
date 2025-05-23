@@ -48,17 +48,20 @@ const stepList = [
 </script>
 <template>
   <div class="back-btn">
-    <a-button size="large" type="link" @click="router.go(-1)"
-      ><template #icon><DoubleLeftOutlined /></template>返回</a-button
-    >
+    <a-button size="large" type="link" @click="router.go(-1)">
+      <template #icon>
+        <DoubleLeftOutlined />
+      </template>
+      返回
+    </a-button>
   </div>
   <div class="prose w-full text-center"><h3>出租不动产代开</h3></div>
   <div class="detail-step mt-6">
     <a-steps direction="vertical">
       <a-step status="process" v-for="(step, index1) in stepList" :key="step.id">
-        <template #title
-          ><div class="text-lg font-bold">{{ step.title }}</div></template
-        >
+        <template #title>
+          <div class="text-lg font-bold">{{ step.title }}</div>
+        </template>
         <template #description>
           <div class="border-b border-gray-200 pb-4">
             <div class="p-2">

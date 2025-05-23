@@ -57,10 +57,17 @@ export default tseslint.config(
   {
     files: ['**/*.vue'],
     languageOptions: {
+      parser: eslintPluginVue.parser,
       parserOptions: {
         /** typescript项目需要用到这个 */
-        parser: tseslint.parser,
+        parser: tseslint.parser, // 这个必须指定为 @typescript-eslint/parser
         ecmaVersion: 'latest',
+        sourceType: 'module',
+        extraFileExtensions: ['.vue'],
+        vueFeatures: {
+          version: 3, // 关键配置
+          filter: false
+        },
         /** 允许在.vue 文件中使用 JSX */
         ecmaFeatures: {
           jsx: true
@@ -74,7 +81,8 @@ export default tseslint.config(
         {
           shallowOnly: true
         }
-      ]
+      ],
+      'vue/multi-word-component-names': 'off' // 关闭多单词组件名警告
     }
   },
 
@@ -83,7 +91,12 @@ export default tseslint.config(
    */
   {
     files: ['**/*.{ts,tsx,vue}'],
-    rules: {}
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json'
+      }
+    }
   },
 
   /**

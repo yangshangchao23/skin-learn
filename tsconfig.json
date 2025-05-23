@@ -1,5 +1,4 @@
 {
-  "files": [],
   "compilerOptions": {
     "esModuleInterop": true,
     "target": "ESNext",
@@ -10,7 +9,11 @@
       "@/*": ["src/*"]
     },
     "lib": ["DOM", "ESNext"],
-    "types": ["vite/client"],
+    "types": [
+      "vite/client",
+      "./types/auto-imports.d.ts",
+      "./types/components.d.ts"
+    ],
     "removeComments": true,
     /* 严格检查选项 */
     "strict": true,
