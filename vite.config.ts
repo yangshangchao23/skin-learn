@@ -1,9 +1,3 @@
-/*
- * @Author: yangshangchao
- * @Date: 2025-05-12 11:19:03
- * @LastEditors: yangshangchao
- * @Description: 头部注释
- */
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -37,6 +31,5 @@ export default defineConfig({
   ],
   server: {
     open: true
-  },
-  base: '/skin-learn/'
+  }
 })
